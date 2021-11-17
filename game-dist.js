@@ -4,10 +4,49 @@
         constructor(x, y) {
             this.x = x;
             this.y = y;
+            this.back = null; // back reference to the square that is behind this one
         }
 
         draw() {
             ctx.fillRect(this.x, this.y, 10, 10);
+            if(this.hasBack()){
+                this.back.draw();
+            }
+        }
+
+        add() {
+            this.back = new Square(this.x, this.y);
+        }
+
+        hasBack() {
+            return this.back !== null;
+        }
+
+        copy() {
+            if(this.hasBack()) {
+                this.back.x = this.x;
+                this.back.y = this.y;
+            }
+        }
+
+        right() {
+            this.copy();
+            this.x += 10;
+        }
+
+        left() {
+            this.copy();
+            this.x -= 10;
+        }
+
+        up() {
+            this.copy();
+            this.y -= 10;
+        }
+
+        down() {
+            this.copy();
+            this.y += 10;
         }
 
     }
@@ -17,6 +56,7 @@
             this.head = new Square(100, 0);
             this.draw();
             this.direction = 'right';
+            this.head.add();
         }
 
         draw() {
@@ -37,10 +77,10 @@
         }
 
         move() {
-            if(this.direction === 'up') return this.head.y -= 10;
-            if(this.direction === 'down') return this.head.y += 10;
-            if(this.direction === 'left') return this.head.x -= 10;
-            if(this.direction === 'right') return this.head.x += 10;
+            if(this.direction === 'up') return this.head.up();
+            if(this.direction === 'down') return this.head.down();
+            if(this.direction === 'left') return this.head.left();
+            if(this.direction === 'right') return this.head.right();
         }
     }
 
