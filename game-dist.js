@@ -1,5 +1,26 @@
 ;(function() {
 
+    class Random{
+        static get(start, end) {
+            return Math.floor(Math.random() * end) + start;
+        }
+    }
+
+    class Food{
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        draw() {
+            ctx.fillRect(this.x, this.y, 10, 10);
+        }            
+
+        static generate() {
+            return new Food(Random.get(0, 500), Random.get(0, 300));
+        }
+    }
+
     class Square {
         constructor(x, y) {
             this.x = x;
@@ -15,6 +36,7 @@
         }
 
         add() {
+            if(this.hasBack()) return this.back.add();
             this.back = new Square(this.x, this.y);
         }
 
@@ -24,6 +46,7 @@
 
         copy() {
             if(this.hasBack()) {
+                this.back.copy()
                 this.back.x = this.x;
                 this.back.y = this.y;
             }
@@ -57,6 +80,8 @@
             this.draw();
             this.direction = 'right';
             this.head.add();
+            this.head.add();
+            this.head.add();
         }
 
         draw() {
@@ -89,17 +114,43 @@
     const ctx = canvas.getContext('2d');
     
     const snake = new Snake();
+    let foods = [];
 
     window.addEventListener("keydown", function(event){
         console.log(event.keyCode);
-        if(event.keyCode === 40) return snake.down();
-        if(event.keyCode === 38) return snake.up();
-        if(event.keyCode === 39) return snake.right();
-        if(event.keyCode === 37) return snake.left();
+        event.preventDefault();
+        if(event.keyCode === 40 || event.keyCode === 83) return snake.down();
+        if(event.keyCode === 38 || event.keyCode === 87) return snake.up();
+        if(event.keyCode === 39 || event.keyCode === 68) return snake.right();
+        if(event.keyCode === 37 || event.keyCode === 65) return snake.left();
+        return false;
     });
     setInterval(function(){
         snake.move();
         ctx.clearRect(0,0,canvas.width,canvas.height);
         snake.draw();
+        drawFood();
     }, 1000 / 5);
+
+    setInterval(function(){
+        const food = Food.generate();
+        foods.push(food);
+
+        setTimeout(function(){removeFromFoods(food)}, 10000)
+
+    }, 4000)
+
+    function drawFood() {
+        for(const index in foods) {
+            const food = foods[index];
+            food.draw();
+        }
+    }
+
+    function removeFromFoods(food) {
+        foods = foods.filter(function(f){
+            return food !== f;
+        });
+    }
+
 })();
