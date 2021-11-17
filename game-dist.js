@@ -76,6 +76,25 @@
             this.y += 10;
         }
 
+        hit(head, second = false) {
+            if(this === head && !this.hasBack()) return false;
+            if(this === head) return this.back.hit(head);
+
+
+            if(second && !this.hasBack()) return false;
+            if(second) return this.back.hit(head, true);
+
+            if(this.hasBack()) {
+                return squareHit(this, head) || this.back.hit(head);
+            }
+
+            return squareHit(this, head);
+        }
+
+        hitBorder() {
+            return this.x > 500 || this.x < 0 || this.y > 300 || this.y < 0;
+        }
+
     }
 
     class Snake {
@@ -93,15 +112,19 @@
         }
 
         right() {
+            if(this.direction === 'left') return;
             this.direction = 'right';
         }
         left() {
+            if(this.direction === 'right') return;
             this.direction = 'left';
         }
         up() {
+            if(this.direction === 'down') return;
             this.direction = 'up';
         }
         down() {
+            if(this.direction === 'up') return;
             this.direction = 'down';
         }
 
@@ -114,6 +137,10 @@
 
         eat() {
             this.head.add();
+        }
+
+        dead() {
+            return this.head.hit(this.head) || this.head.hitBorder();
         }
     }
 
@@ -138,6 +165,11 @@
         ctx.clearRect(0,0,canvas.width,canvas.height);
         snake.draw();
         drawFood();
+
+        if(snake.dead()){
+            console.log('Game Over');
+            window.location.reload();
+        }
     }, 1000 / 10);
 
     setInterval(function(){
@@ -165,6 +197,10 @@
         foods = foods.filter(function(f){
             return food !== f;
         });
+    }
+
+    function squareHit(squareOne, squareTwo) {
+        return squareOne.x == squareTwo.x && squareOne.y == squareTwo.y;
     }
 
     function hit(a, b){ 
