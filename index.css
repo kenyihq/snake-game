@@ -1,0 +1,44 @@
+body {
+    background: radial-gradient(41.48% 11.48% at 2.38% 8.52%, #747DE9 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(135deg, #72EDF2 0%, #5151E5 100%);
+    min-block-size: 100vh;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+h1 {
+    font-size: 50px;
+    color: #310A90;
+}
+
+.container {
+    inset: 0;
+}
+
+#canvas {
+    border: 10px double #310A90;
+    border-radius: 15px;
+}
+
+.controls {
+    border: 2px solid red;
+    width: 350px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+}
+
+.button {
+    background: #310A90;
+    color: white;
+    font: bold 14px;
+    padding-inline-start: 24px;
+    padding-inline-end: 24px;
+    padding-block-start: 13px;
+    padding-block-end: 13px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    border: none;
+    text-decoration: none;
+    text-align: center;
+}
