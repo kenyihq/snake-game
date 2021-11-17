@@ -162,6 +162,14 @@ window.addEventListener("keydown", function(event){
     
     return false;
 });
+
+window.addEventListener("click", function(event){
+    if(event.target.id === 'up') return snake.up();
+    if(event.target.id === 'down') return snake.down();
+    if(event.target.id === 'left') return snake.left();
+    if(event.target.id === 'right') return snake.right();
+});
+
 setInterval(function(){
     snake.move();
     ctx.clearRect(0,0,canvas.width,canvas.height);
