@@ -97,7 +97,7 @@ class Square {
 
 class Snake {
     constructor() {
-        this.head = new Square(100, 0);
+        this.head = new Square(Random.get(0, 500), Random.get(0, 300));
         this.draw();
         this.direction = 'right';
         this.head.add();
@@ -180,15 +180,15 @@ setInterval(function(){
         console.log('Game Over');
         window.location.reload();
     }
-}, 1000 / 10);
+}, 1000 / 7.5);
 
 setInterval(function(){
     const food = Food.generate();
     foods.push(food);
 
-    setTimeout(function(){removeFromFoods(food)}, 10000)
+    setTimeout(function(){removeFromFoods(food)}, 12000)
 
-}, 4000)
+}, 3000)
 
 function drawFood() {
     for(const index in foods) {

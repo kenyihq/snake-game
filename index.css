@@ -2,7 +2,6 @@ body {
     background: radial-gradient(41.48% 11.48% at 2.38% 8.52%, #747DE9 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(135deg, #72EDF2 0%, #5151E5 100%);
     min-block-size: 100vh;
     font-family: 'Poppins', sans-serif;
-    text-align: center;
 }
 
 h1 {
@@ -11,29 +10,36 @@ h1 {
 }
 
 .container {
-    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 }
 
 #canvas {
-    border: 10px double #310A90;
+    border: 5px dashed #310A90;
     border-radius: 15px;
+    width: 85%;
+    max-width: 1000px;
 }
 
 .controls {
-    width: 350px;
     margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 20px;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
 }
 
 .button {
     width: 50px;
     height: 50px;
-    padding: 10px;
+    margin: 2px 2px 2px 2px;
     border-radius: 4px;
     background: white;
-    border: 2px solid purple;
+    border: 2px solid #310A90;
     text-decoration: none;
     display: inline-block;
 }
@@ -43,23 +49,34 @@ h1 {
 }
 
 .button:hover {
-    background: #5151E5;
+    background: #310A90;
 }
 
-/* #up {
-    background-image: url("./images/up.svg");
+.button-author {
+    margin-top: 20px;
+    color: #310A90;
+    font: 'Poppins';
+    padding-inline-start: 24px;
+    padding-inline-end: 24px;
+    padding-block-start: 10px;
+    padding-block-end: 10px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    border: 3px solid #310A90;
 }
 
-#down {
-    background-image: url("./images/down.svg");
+.button-author a {
+    color: white;
+    text-decoration: none;
+    padding: auto;
 }
 
-#left {
-    background-image: url("./images/left.svg");
-}
-
-#right {
-    background-image: url("./images/right.svg");
+/* @media screen and (max-width: 600px) {
+    #canvas {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 75%;
+    }
 } */
-
 
